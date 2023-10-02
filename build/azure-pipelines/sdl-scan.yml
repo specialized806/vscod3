@@ -50,9 +50,10 @@ stages:
             inputs:
               scanFolder: "$(Build.SourcesDirectory)"
               outputFormat: "pre"
+
           - task: NodeTool@0
             inputs:
-              versionSpec: "18.15"
+              versionSpec: "18.17"
 
           - template: ./distro/download-distro.yml
 
