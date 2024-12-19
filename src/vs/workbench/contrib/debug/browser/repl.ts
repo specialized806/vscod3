@@ -214,7 +214,6 @@ export class Repl extends FilterViewPane implements IHistoryNavigationWidget {
 					this.tree?.updateChildren(undefined, true, false);
 					this.onDidStyleChange();
 				}
-				this.focus();
 			}
 		}));
 		this._register(this.configurationService.onDidChangeConfiguration(e => {
@@ -667,6 +666,7 @@ export class Repl extends FilterViewPane implements IHistoryNavigationWidget {
 				filter: this.filter,
 				accessibilityProvider: new ReplAccessibilityProvider(),
 				identityProvider,
+				userSelection: true,
 				mouseSupport: false,
 				findWidgetEnabled: true,
 				keyboardNavigationLabelProvider: { getKeyboardNavigationLabel: (e: IReplElement) => e.toString(true) },
