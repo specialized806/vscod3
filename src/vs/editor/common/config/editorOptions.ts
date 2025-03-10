@@ -1944,7 +1944,7 @@ class EffectiveExperimentalEditContextEnabled extends ComputedEditorOption<Edito
 
 	public compute(env: IEnvironmentalOptions, options: IComputedEditorOptions): boolean {
 		const editContextSupported = typeof (globalThis as any).EditContext === 'function';
-		return editContextSupported && env.accessibilitySupport !== AccessibilitySupport.Enabled && options.get(EditorOption.experimentalEditContextEnabled);
+		return editContextSupported && options.get(EditorOption.experimentalEditContextEnabled);
 	}
 }
 
@@ -4278,10 +4278,6 @@ export interface IInlineSuggestOptions {
 		* @internal
 		*/
 		useMultiLineGhostText?: boolean;
-		/**
-		* @internal
-		*/
-		useGutterIndicator?: boolean;
 	};
 }
 
@@ -4313,7 +4309,6 @@ class InlineEditorSuggest extends BaseEditorOption<EditorOption.inlineSuggest, I
 				useMixedLinesDiff: 'forStableInsertions',
 				useInterleavedLinesDiff: 'never',
 				renderSideBySide: 'auto',
-				useGutterIndicator: true,
 				codeShifting: true,
 				useMultiLineGhostText: true
 			},
@@ -4422,7 +4417,6 @@ class InlineEditorSuggest extends BaseEditorOption<EditorOption.inlineSuggest, I
 				codeShifting: boolean(input.edits?.codeShifting, this.defaultValue.edits.codeShifting),
 				renderSideBySide: stringSet(input.edits?.renderSideBySide, this.defaultValue.edits.renderSideBySide, ['never', 'auto']),
 				useInterleavedLinesDiff: stringSet(input.edits?.useInterleavedLinesDiff, this.defaultValue.edits.useInterleavedLinesDiff, ['never', 'always', 'afterJump']),
-				useGutterIndicator: boolean(input.edits?.useGutterIndicator, this.defaultValue.edits.useGutterIndicator),
 				useMultiLineGhostText: boolean(input.edits?.useMultiLineGhostText, this.defaultValue.edits.useMultiLineGhostText),
 			},
 		};
