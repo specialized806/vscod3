@@ -56,7 +56,7 @@ export class TreeSitterTokens extends AbstractTokens {
 
 	public getLineTokens(lineNumber: number): LineTokens {
 		const content = this._textModel.getLineContent(lineNumber);
-		if (this._tokenizationSupport) {
+		if (this._tokenizationSupport && content.length > 0) {
 			const rawTokens = this._tokenStore.getTokens(this._textModel, lineNumber);
 			if (rawTokens) {
 				return new LineTokens(rawTokens, content, this._languageIdCodec);
@@ -88,6 +88,8 @@ export class TreeSitterTokens extends AbstractTokens {
 		if (e.isFlush) {
 			// Don't fire the event, as the view might not have got the text change event yet
 			this.resetTokenization(false);
+		} else {
+			this._tokenStore.handleContentChanged(this._textModel, e);
 		}
 	}
 
